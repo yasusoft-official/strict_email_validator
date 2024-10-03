@@ -1,6 +1,6 @@
 name = "strict_email_validator_tests"
 description = "Ada Strict Email Validatior Testing"
-version = "0.0.1"
+version = "1.0.0"
 
 authors = ["Vladimir Fedorov"]
 maintainers = ["Vladimir Fedorov <khv2online@gmail.com>"]
