@@ -39,6 +39,13 @@ package Strict_Email_Validator is
    function Normalized_Email_Address
      (Success_Result : Syntax_Validation_Success) return String;
 
+   ---------------------------------------------
+   -- Failed Syntax Validation Result Getters --
+   ---------------------------------------------
+
+   function Error_Kind
+     (Failed_Result : Syntax_Validation_Fail) return Syntax_Error;
+
    -----------------------
    -- Syntax Validation --
    -----------------------

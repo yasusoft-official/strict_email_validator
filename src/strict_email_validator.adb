@@ -38,6 +38,14 @@ package body Strict_Email_Validator is
       return Email_Address_String.To_String (Success_Result.Normalized_Value);
    end Normalized_Email_Address;
 
+   ---------------------------------------------
+   -- Failed Syntax Validation Result Getters --
+   ---------------------------------------------
+
+   function Error_Kind
+     (Failed_Result : Syntax_Validation_Fail) return Syntax_Error is
+     (Failed_Result.Error_Kind);
+
    -------------------
    -- Normalization --
    -------------------
