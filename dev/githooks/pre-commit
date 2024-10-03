@@ -1,0 +1,18 @@
+#!/bin/env fish
+
+set -l list_file '/tmp/gnatpp_list.txt'
+git diff --cached --name-only --diff-filter=ACM --output=$list_file -- '*.ads' '*.adb'
+
+if test -s $list_file
+    gnatpp --wide-character-encoding=8 --eol=unix --no-compact -q --files=$list_file
+    set -l gnatpp_exit_code $status
+    if test $gnatpp_exit_code -eq 1
+        rm -rf GNAT-*
+    else
+        for file in (cat $list_file)
+            git stage $file
+        end
+    end
+    # rm -rf $list_file
+    exit $gnatpp_exit_code
+end
