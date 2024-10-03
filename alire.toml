@@ -5,11 +5,10 @@ version = "0.1.0-dev"
 authors = ["Vladimir Fedorov"]
 maintainers = ["Vladimir Fedorov <khv2online@gmail.com>"]
 maintainers-logins = ["khv2online"]
-licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+licenses = "MIT"
 website = ""
 tags = []
 
 [build-switches]
-"*".ada_version = "Ada2022"
+"*".ada_version = "Ada12"
 development.style_checks = "No"
-

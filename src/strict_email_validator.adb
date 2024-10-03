@@ -53,10 +53,8 @@ package body Strict_Email_Validator is
       use Ada.Strings.Maps;
 
       Printable_Whitespace_Characters_Sequence : constant String :=
-        [Ada.Characters.Latin_1.Space,
-        Ada.Characters.Latin_1.HT,
-        Ada.Characters.Latin_1.CR,
-        Ada.Characters.Latin_1.LF];
+        Ada.Characters.Latin_1.Space & Ada.Characters.Latin_1.HT &
+        Ada.Characters.Latin_1.CR & Ada.Characters.Latin_1.LF;
 
       Whitespace_Set : constant Character_Set :=
         To_Set (Printable_Whitespace_Characters_Sequence);
