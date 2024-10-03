@@ -38,6 +38,14 @@ package body Strict_Email_Validator is
       return Email_Address_String.To_String (Success_Result.Normalized_Value);
    end Normalized_Email_Address;
 
+   ---------------------------------------------
+   -- Failed Syntax Validation Result Getters --
+   ---------------------------------------------
+
+   function Error_Kind
+     (Failed_Result : Syntax_Validation_Fail) return Syntax_Error is
+     (Failed_Result.Error_Kind);
+
    -------------------
    -- Normalization --
    -------------------
@@ -45,10 +53,8 @@ package body Strict_Email_Validator is
       use Ada.Strings.Maps;
 
       Printable_Whitespace_Characters_Sequence : constant String :=
-        [Ada.Characters.Latin_1.Space,
-        Ada.Characters.Latin_1.HT,
-        Ada.Characters.Latin_1.CR,
-        Ada.Characters.Latin_1.LF];
+        Ada.Characters.Latin_1.Space & Ada.Characters.Latin_1.HT &
+        Ada.Characters.Latin_1.CR & Ada.Characters.Latin_1.LF;
 
       Whitespace_Set : constant Character_Set :=
         To_Set (Printable_Whitespace_Characters_Sequence);
