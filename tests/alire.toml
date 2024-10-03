@@ -1,0 +1,23 @@
+name = "strict_email_validator_tests"
+description = "Ada Strict Email Validatior Testing"
+version = "0.0.1"
+
+authors = ["Vladimir Fedorov"]
+maintainers = ["Vladimir Fedorov <khv2online@gmail.com>"]
+maintainers-logins = ["khv2online"]
+
+executables = ["strict_email_validator_tests"]
+
+[build-switches]
+"*".ada_version = "Ada2022"
+development.style_checks = "No"
+
+[[depends-on]]
+trendy_test = "~0.0.3"
+strict_email_validator = "*"
+
+[[pins]]
+strict_email_validator = { path='..' }
+
+[[depends-on]]
+gnatcoll = "^24.0.0"

@@ -1,0 +1,239 @@
+[
+	{
+		"desc": "Valid Emails",
+		"cases": [
+			"simple@mail.com",
+			"simple@mail.club",
+			"UPPER@CASED.COM",
+			"MixedCase@DomainName.org",
+			"  left@padded.com",
+			"right@padded.com  ",
+			"  bothsides@padded.com  ",
+			"dot.recipient@mail.com",
+			"x@mail.com",
+			"long.email-address-with-hyphens@and.subdomains.mail.com",
+			"user.name@mail.com",
+			"oneletterdomain@s.com",
+			"abc-d@mail.com",
+			"a-bcd@mail.com",
+			"a.bcd@mail.com",
+			"a_bcd@mail.com",
+			"abc-d@mail.com",
+			"abc.d@mail.com",
+			"abc_d@mail.com",
+			"abc-xyz@mail.com",
+			"abc.xyz@mail.com",
+			"abc_xyz@mail.com",
+			"abc@mail.cc",
+			"with-hyphen@mail.com",
+			"domain@with-hyphen.com",
+			"some_user_.name@mail.com",
+			"some@mai--l.com",
+			"some@m4--l.com"
+		],
+		"expect": { "isValid": true }
+	},
+
+	{
+		"desc": "An email address must have an @-sign",
+		"cases": ["abc_mail.com", "abc-mail.com", "abcmail.com", ""],
+		"expect": { "isValid": false, "ErrorKind": "MISSING_AT_SIGN" }
+	},
+
+	{
+		"desc": "An email address cannot have two periods in a row",
+		"cases": ["abc@mail..com", "abc..xyz@mail.com"],
+		"expect": { "isValid": false, "ErrorKind": "CONSECUTIVE_PERIODS" }
+	},
+
+	{
+		"desc": "There must be something before the @-sign",
+		"cases": [
+			" @mail.com",
+			"  @mail.com",
+			"\t@mail.com",
+			"\n@mail.com",
+			"\r\n@mail.com",
+			"@mail.com",
+			"@some-mail.com",
+			"@some.mail.com"
+		],
+		"expect": { "isValid": false, "ErrorKind": "MISSING_LOCAL_PART" }
+	},
+
+	{
+		"desc": "There must be something after the @-sign",
+		"cases": ["some@", "some.user@", "some-user@", "some@ ", "some@\t"],
+		"expect": { "isValid": false, "ErrorKind": "MISSING_DOMAIN" }
+	},
+
+	{
+		"desc": "The local part is too long",
+		"cases": [
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@mail.com",
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@mail.com",
+			"xxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxx-xxxxxxxx@mail.com",
+			"xxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxx.xxxxxxxxxxxx.xxxxxxxxxx.xxxxx@mail.com",
+			"xxxxxxxxxxxxxxxxxxx_xxxxxxxxx_xxxxxxxxxxxxxx_xxxxxxxxxxx_xxxxxxxx@mail.com",
+			"abcxxx.xxx1x-xxbxxx.xxxx2XXAR_xxx0x.xxxx.xxx_xxeXXX-x4xx_xxxx-xxx@mail.com"
+		],
+		"expect": { "isValid": false, "ErrorKind": "LOCAL_PART_TOO_LONG" }
+	},
+
+	{
+		"desc": "A local part cannot start with a period",
+		"cases": [
+			".some@mail.com",
+			".some.address@mail.com",
+			".some-address@mail.com",
+			".some_address@mail.com",
+			".some_addr.ess@mail.com"
+		],
+		"expect": { "isValid": false, "ErrorKind": "LOCAL_PART_STARTS_WITH_PERIOD" }
+	},
+
+	{
+		"desc": "A local part cannot end with a period",
+		"cases": [
+			"some.@mail.com",
+			"some.address.@mail.com",
+			"some-address.@mail.com",
+			"some_address.@mail.com",
+			"some_addr.ess.@mail.com"
+		],
+		"expect": { "isValid": false, "ErrorKind": "LOCAL_PART_ENDS_WITH_PERIOD" }
+	},
+
+	{
+		"desc": "The local part contains invalid characters",
+		"cases": [
+			"plus+sign@mail.com",
+			"comma,sign@mail.com",
+			"star*sign@mail.com",
+			"exclamat!on@mail.com",
+			"dollar$sign@mail.com",
+			"eq=sign@mail.com",
+			"percent%sign@mail.com",
+			"angle^top@mail.com",
+			"back`tick@mail.com",
+			"h#sh@mail.com",
+			"apostroph'e@mail.com",
+			"quot\"e@mail.com",
+			"question?sign@mail.com",
+			"slash/sign@mail.com",
+			"p|pe@mail.com",
+			"ti~da@mail.com",
+			"ampers&nd@mail.com",
+			"open{brace@mail.com",
+			"close}brace@mail.com",
+			"spa ce@mail.com"
+		],
+		"expect": {
+			"isValid": false,
+			"ErrorKind": "INVALID_CHARACTER_IN_LOCAL_PART"
+		}
+	},
+
+	{
+		"desc": "The domain part is too long (> 95 octets)",
+		"cases": [
+			"some@xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.com",
+			"some@xxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxx.com",
+			"some@xxxxxxxxxxxxx.xxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxx.xxxxxxxx.com",
+			"some@ğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğğ.tr",
+			"some@ğğğğğğğğğğğ.ğğğğğğğğğğğğğğğğğğ.ğğğğğğğğğğğğğğğğğ.ğğğğğğğğğğğğğğ.tr",
+			"some@ğğğğğğğğğğğ-ğğğğğğğğğğğğğğğğğğ-ğğğğğğğğğğğğğğğğğ-ğğğğğğğğğğğğğğ.tr"
+		],
+		"expect": { "isValid": false, "ErrorKind": "DOMAIN_TOO_LONG" }
+	},
+
+	{
+		"desc": "There is no period in domain part",
+		"cases": ["some@localhost", "some@mailcom"],
+		"expect": { "isValid": false, "ErrorKind": "MISSING_PERIOD_IN_DOMAIN" }
+	},
+
+	{
+		"desc": "A domain part cannot end with a period",
+		"cases": ["some@mail.com.", "some@mail-com.", "some@mailcom."],
+		"expect": { "isValid": false, "ErrorKind": "DOMAIN_ENDS_WITH_PERIOD" }
+	},
+
+	{
+		"desc": "Invalid TLD",
+		"cases": [
+			"some@mailco.m",
+			"some@mai.$om",
+			"some@mai.4om",
+			"some@mai.c_om",
+			"some@mai.co-m"
+		],
+		"expect": { "isValid": false, "ErrorKind": "INVALID_TLD" }
+	},
+
+	{
+		"desc": "A base domain must start with an aphanumeric character",
+		"cases": [
+			"some@.mail.com",
+			"some@-mail.com",
+			"some@-mail-service.com",
+			"some-user@-mail.com"
+		],
+		"expect": {
+			"isValid": false,
+			"ErrorKind": "DOMAIN_STARTS_WITH_NON_ALPHANUMERIC"
+		}
+	},
+
+	{
+		"desc": "The base domain contains invalid characters",
+		"cases": [
+			"some@ma|l.com",
+			"some@ma,l.com",
+			"some@ma*l.com",
+			"some@ma!l.com",
+			"some@ma$l.com",
+			"some@ma=l.com",
+			"some@ma!l.com",
+			"some@ma%l.com",
+			"some@ma^l.com",
+			"some@ma`l.com",
+			"some@ma#l.com",
+			"some@ma?l.com",
+			"some@ma il.com",
+			"some@ma'il.com",
+			"some@ma/il.com",
+			"some@ma~il.com",
+			"some@ma&il.com",
+			"some@ma}il.com",
+			"some@ma{il.com"
+		],
+		"expect": { "isValid": false, "ErrorKind": "INVALID_CHARACTER_IN_DOMAIN" }
+	},
+
+	{
+		"desc": "The domain cannot start with two letters followed by two dashes",
+		"cases": ["some@ma--il.com"],
+		"expect": {
+			"isValid": false,
+			"ErrorKind": "DOMAIN_STARTS_WITH_TWO_LETTERS_TWO_HYPHENS"
+		}
+	},
+
+	{
+		"desc": "The domain cannot have a period and a hyphen next to each other",
+		"cases": [
+			"some@ma.-il.com",
+			"some@ma-.il.com",
+			"some@mail.mail.-il.com",
+			"some@mail.mail-.il.com",
+			"some@mail-mail.-il.com",
+			"some@mail-mail-.il.com",
+			"some@mail-.com"
+		],
+		"expect": {
+			"isValid": false,
+			"ErrorKind": "ADJACENT_PERIODS_AND_HYPHENS_IN_DOMAIN"
+		}
+	}
+]

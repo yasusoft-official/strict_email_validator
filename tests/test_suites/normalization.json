@@ -1,0 +1,37 @@
+[
+	{
+		"desc": "Proper simple email strings",
+		"cases": ["simple@mail.com"],
+		"expect": "simple@mail.com"
+	},
+
+	{
+		"desc": "Whitespace padded email strings",
+		"cases": [
+			"   simple@mail.com",
+			"simple@mail.com    ",
+			"    simple@mail.com    ",
+			"\t\tsimple@mail.com",
+			"simple@mail.com\t",
+			"\t\tsimple@mail.com\t\t",
+			"\n\nsimple@mail.com",
+			"simple@mail.com\n\n",
+			"\n\nsimple@mail.com\n\n",
+			"\r\nsimple@mail.com",
+			"simple@mail.com\r\n",
+			"\r\nsimple@mail.com\r\n"
+		],
+		"expect": "simple@mail.com"
+	},
+
+	{
+		"desc": "Different cases email strings",
+		"cases": [
+			"SIMPLE@MAIL.COM",
+			"simple@MAIL.COM",
+			"SIMPLE@mail.com",
+			"SiMPlE@mAiL.cOm"
+		],
+		"expect": "simple@mail.com"
+	}
+]
