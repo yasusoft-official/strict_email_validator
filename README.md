@@ -10,6 +10,21 @@ based on the strict set of rules:
 - A top-level domain (TLD) is mandatory and must consist of 2+
   alphabetic characters.
 
+## Requirements
+
+- Ada2012 compatible compiler.
+
+## Dependencies
+
+#### Package Itself
+
+None. It only uses the Ada standard library.
+
+#### Test Suite
+
+- GNAT v14+
+- GNATCOLL v24+
+
 ## Example Usage
 
 ```ada
