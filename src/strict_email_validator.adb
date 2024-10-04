@@ -75,35 +75,32 @@ package body Strict_Email_Validator is
    is
       Normalized_Value : constant String := Normalize (Email_Address);
 
-      At_Sign_Idx : constant Natural :=
+      At_Sign_Octet_Index : constant Natural :=
         Index (Normalized_Value, "@", Going => Backward);
    begin
       Step_01_Check_Presence_Of_At_Sign_Local_Part_And_Domain :
       begin
-         if At_Sign_Idx = 0 then
+         if At_Sign_Octet_Index = 0 then
             return New_Syntax_Validation_Fail (Error_Kind => Missing_At_Sign);
          end if;
 
-         if At_Sign_Idx = Normalized_Value'First then
+         if At_Sign_Octet_Index = Normalized_Value'First then
             return
               New_Syntax_Validation_Fail (Error_Kind => Missing_Local_Part);
          end if;
 
-         if At_Sign_Idx = Normalized_Value'Last then
+         if At_Sign_Octet_Index = Normalized_Value'Last then
             return New_Syntax_Validation_Fail (Error_Kind => Missing_Domain);
          end if;
       end Step_01_Check_Presence_Of_At_Sign_Local_Part_And_Domain;
 
       Step_02_Check_Lengths :
       declare
-         At_Sign_Idx_In_Octets : constant Natural :=
-           Index (Normalized_Value, "@", Going => Backward);
-
          Local_Part_Length_In_Octets : constant Natural :=
-           At_Sign_Idx_In_Octets - 1;
+           At_Sign_Octet_Index - 1;
 
          Domain_Length_In_Octets : constant Natural :=
-           Normalized_Value'Last - At_Sign_Idx_In_Octets;
+           Normalized_Value'Last - At_Sign_Octet_Index;
       begin
          if Local_Part_Length_In_Octets > Max_Recipient_Name_Length_In_Octets
          then
@@ -132,7 +129,8 @@ package body Strict_Email_Validator is
       Check_Local_Part :
       declare
          Local_Part : constant String :=
-           Normalized_Value (Normalized_Value'First .. At_Sign_Idx - 1);
+           Normalized_Value
+             (Normalized_Value'First .. At_Sign_Octet_Index - 1);
       begin
          Step_04_Check_For_Period_At_The_Start_Of_The_Local_Part :
          begin
@@ -169,7 +167,7 @@ package body Strict_Email_Validator is
       Check_Domain :
       declare
          Domain : constant String :=
-           Normalized_Value (At_Sign_Idx + 1 .. Normalized_Value'Last);
+           Normalized_Value (At_Sign_Octet_Index + 1 .. Normalized_Value'Last);
 
          Last_Period_Idx : constant Natural :=
            Index (Domain, ".", Going => Backward);
