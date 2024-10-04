@@ -71,8 +71,7 @@ private
    package Email_Address_String is new Ada.Strings.Bounded
      .Generic_Bounded_Length
      (Max =>
-        Max_Recipient_Name_Length_In_Octets +
-        Max_Recipient_Name_Length_In_Octets + 1);
+        Max_Recipient_Name_Length_In_Octets + Max_Domain_Length_In_Octets + 1);
 
    -------------------------------
    -- Syntax Validation Results --
