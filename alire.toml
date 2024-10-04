@@ -1,6 +1,6 @@
 name = "strict_email_validator"
 description = ""
-version = "1.0.0"
+version = "1.0.1"
 
 authors = ["Vladimir Fedorov"]
 maintainers = ["Vladimir Fedorov <khv2online@gmail.com>"]
