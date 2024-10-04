@@ -3,10 +3,11 @@
 The package provides functionality for validating email addresses syntax
 based on the strict set of rules:
 
-- Only alphanumeric characters, ., -, and \_ are permitted.
+- Only Latin alphanumeric characters, periods, hyphens, and underscores
+  are permitted.
 - Punycode is not permitted.
 - The maximum length of the local part is 48 octets.
-- The maximum length of the domain is 79 octets.
+- The maximum length of the domain part is 79 octets.
 - A top-level domain (TLD) is mandatory and must consist of 2+
   alphabetic characters.
 
@@ -23,7 +24,8 @@ None. It only uses the Ada standard library.
 #### Test Suite
 
 - GNAT v14+
-- GNATCOLL v24+
+- GNATCOLL 24+
+- trendy-test
 
 ## Example Usage
 
