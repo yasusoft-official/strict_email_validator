@@ -27,6 +27,20 @@ None. It only uses the Ada standard library.
 - GNATCOLL 24+
 - trendy-test
 
+## How It Works
+
+The `Validate_Syntax` function accepts an email address string, trims
+printable whitespace characters from the edges, converts it to
+lowercase, and validates it according to a certain set of rules. Please
+note that the rules are much stricter than those allowed by published
+RFC standards.
+
+If validation succeeds, the normalized email address can be retrieved
+from the result record via `Normalized_Email_Address` function.
+
+In case of unsuccesful validation, the error reason can be retrieved
+from the result record using the `Error_Kind` function.
+
 ## Example Usage
 
 ```ada
