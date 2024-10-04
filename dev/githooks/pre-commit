@@ -13,6 +13,6 @@ if test -s $list_file
             git stage $file
         end
     end
-    # rm -rf $list_file
+    rm -rf $list_file
     exit $gnatpp_exit_code
 end
