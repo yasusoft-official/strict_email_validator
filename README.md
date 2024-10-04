@@ -24,7 +24,7 @@ None. It only uses the Ada standard library.
 #### Test Suite
 
 - GNAT v14+
-- GNATCOLL 24+
+- GNATCOLL v24+
 - trendy-test
 
 ## How It Works
